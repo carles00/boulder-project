@@ -1,0 +1,75 @@
+.form-component {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  gap: 0.5vh;
+}
+
+.form-group {
+  --pad: 0.85rem;
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  position: absolute;
+  left: var(--pad);
+  top: var(--pad);
+  pointer-events: none;
+  transition: transform 200ms;
+}
+
+.form-input {
+  height: 55px;
+  padding: 10px;
+  background-color: var(--primary-shadow-light);
+  font-size: larger;
+  border: none;
+  border-left: solid 4px var(--secondary);
+}
+
+.form-input_error {
+  border-left: solid 4px var(--danger);
+}
+
+.form-input:hover,
+.form-input:focus-visible {
+  transition: 150ms;
+  background-color: var(--primary-shadow);
+  border-left: solid 4px var(--highlight);
+}
+
+.form-input::placeholder {
+  opacity: 0%;
+}
+
+.form-button {
+  background-color: var(--highlight);
+  height: 24px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  font-size: large;
+}
+
+.form-button:hover {
+  transition: 150ms;
+  background-color: var(--highlight-hover);
+}
+
+.form-input:focus,
+.form-input:not(:placeholder-shown) {
+  /* style when the input is filled or focused */
+  padding-top: 25px;
+}
+
+.form-input:focus + .form-label,
+.form-input:not(:placeholder-shown) + .form-label {
+  /* style when the input is filled or focused */
+  transform: translateY(calc(7% - var(--pad)));
+  color: var(--accent);
+}

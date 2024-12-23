@@ -1,0 +1,60 @@
+.home-head {
+  box-sizing: border-box;
+  background-color: var(--white);
+  display: flex;
+  grid-column: 1/6;
+  grid-row: 1/1;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 2em;
+  padding-right: 2em;
+  border-bottom: solid 1px var(--border-subtle);
+  
+}
+
+.nav-buttons-container{
+  display: flex;
+  align-items: center;
+  gap: 4em;
+}
+
+.home-foot {
+  background-color: var(--footer);
+  display: flex;
+  grid-column: 1/6;
+  grid-row: 3/4;
+  padding-left: 2em;
+  padding-right: 2em;
+  border-top: solid 1px var(--border-subtle);
+}
+
+.kLogo{
+  color: var(--highlight);
+}
+
+.home-nav {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 2em;
+}
+
+.nav-button {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.nav-button:hover > a {
+  color: var(--highlight)
+}
+
+.nav-link {
+  font-size: larger;
+  font-weight: 500;
+}
+
+a.active {
+  color: var(--highlight);
+}
+

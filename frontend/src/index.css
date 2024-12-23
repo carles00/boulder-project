@@ -1,0 +1,80 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-size: 100%;
+
+  --primary: #fff2e4;
+  --primary-shadow: #a9a19854;
+  --primary-shadow-light: #ded3c754;
+  --secondary: #554f47;
+  --secondary-light: #b1a89e;
+  --white: #ffffff;
+  --white-highlight: #dcdcdc;
+  --white-hover: #a9a19854;
+  --highlight: #61a542;
+  --highlight-hover: #538e38;
+  --danger: #c01717;
+  --border-subtle: #e0e0e0;
+  --footer: #ded3c7;
+
+  --font-color: #212121;
+
+  color-scheme: light;
+  color: var(--font-color);
+  
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
+body{
+  background: radial-gradient(var(--secondary-light) 3%, transparent 3%),
+    radial-gradient(var(--secondary-light) 3%, transparent 3%);
+  background-size: 150px 150px;
+  background-position: 0 0, 75px 75px;
+  background-color: var(--primary);
+}
+
+div{
+  box-sizing: border-box;
+}
+
+a{
+  text-decoration: none;
+  color: var(--font-color) ;
+}
+
+a:hover {
+  color: var(--font-color);
+}
+
+button:hover{
+  cursor: pointer;
+}
+
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+input{
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+.grid-container{
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
+  grid-template-rows: 1fr 9fr 2fr;
+}

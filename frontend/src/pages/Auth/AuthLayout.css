@@ -1,0 +1,51 @@
+.authPage{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.authContainer{
+  grid-column: 3/4;
+  grid-row: 2/3;
+  padding: 1em;
+  padding-bottom: 2em;
+  border-radius: 1px;
+  background-color: var(--white);
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  color: var(--secondary);
+  justify-content: center;
+}
+
+.auth-form{
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  gap: 0.5vh;
+}
+
+.signup-link{
+  margin-top: 3vh;
+}
+
+.right-aside {
+  grid-column: 1/3;
+  grid-row: 2/2;
+  margin: 0px;
+  padding: 0px;
+}
+
+.left-aside {
+  grid-column: 4/6;
+  grid-row: 2/2;
+  margin: 0px;
+  padding: 0px;
+}
+
+.home-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
