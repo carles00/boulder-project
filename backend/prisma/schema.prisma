@@ -17,15 +17,16 @@ model User {
   id              Int         @id @default(autoincrement())
   email           String      @unique
   username        String      @unique
-  password        String      
+  password        String
   name            String?
   picture         String?
   description     String?
   gymId           Int?
   attemptedRoutes UserRoute[]
-  followedBy User[]  @relation("UserFollows")
-  following  User[]  @relation("UserFollows")
-  Gym             Gym?        @relation(fields: [gymId], references: [id])
+  followedBy      User[]      @relation("UserFollows")
+  following       User[]      @relation("UserFollows")
+  gym             Gym?        @relation(name: "gymOwner")
+  favouriteGym    Gym?        @relation(name: "favouriteGym", fields: [gymId], references: [id])
 }
 
 model Gym {
@@ -38,8 +39,10 @@ model Gym {
   website     String?
   phone       String?
   logo        String?
+  owner       User    @relation(name: "gymOwner", fields: [id], references: [id])
   routes      Route[]
-  Users       User[]
+  users       User[]  @relation(name: "favouriteGym")
+  userId      Int
 }
 
 model Route {
@@ -56,13 +59,13 @@ model Route {
 }
 
 model UserRoute {
-  userId  Int
-  routeId Int
-  tires Int @default(0)
+  userId    Int
+  routeId   Int
+  tires     Int     @default(0)
   completed Boolean @default(false)
-  rating Int @default(0)
-  User    User  @relation(fields: [userId], references: [id])
-  Route   Route @relation(fields: [routeId], references: [id])
+  rating    Int     @default(0)
+  User      User    @relation(fields: [userId], references: [id])
+  Route     Route   @relation(fields: [routeId], references: [id])
 
   @@id([userId, routeId])
 }

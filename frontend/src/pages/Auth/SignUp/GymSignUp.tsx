@@ -3,7 +3,8 @@ import FormComponent from "../../../lib/components/Form";
 
 interface IFormInput{
   email: string,
-  address: string
+  address: string,
+  name: string
 }
 
 export default function GymSignUp(){
@@ -20,6 +21,12 @@ export default function GymSignUp(){
           label="Contact email"
           name="email"
           register={register("email", {required: true})}
+        />
+        <FormComponent.FormInput 
+          type="text"
+          label="Name"
+          name="name"
+          register={register('name', {required: true})}
         />
         <FormComponent.FormInput 
           type="text"
