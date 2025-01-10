@@ -2,17 +2,23 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import { BrowserRouter } from "react-router";
-import UserProvider from "./lib/userContext/userProvider.tsx";
 import App from "./App.tsx";
-
-let userString = localStorage.getItem("blocker_user");
+import { Auth0Provider } from "@auth0/auth0-react";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
-      <UserProvider userString={userString}>
+      <Auth0Provider
+        domain={import.meta.env.VITE_AUTH0_DOMAIN}
+        clientId={import.meta.env.VITE_AUTH0_CLIENT}
+        authorizationParams={{
+          redirect_uri: import.meta.env.VITE_AUTH0_LOGIN_REDIRECT,
+          audience: import.meta.env.VITE_AUTH0_AUDIENCE,
+          scope: "read:current_user update:current_user_metadata"
+        }}
+      >
         <App />
-      </UserProvider>
+      </Auth0Provider>
     </BrowserRouter>
   </StrictMode>
 );

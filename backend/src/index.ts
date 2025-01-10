@@ -1,6 +1,11 @@
 import express from "express";
 import usersRouter from "./controllers/usersController";
 import  cors from 'cors';
+import dotenv from 'dotenv';
+import { errorHandler } from "./middleware/error";
+import { notFoundHandler } from "./middleware/notFound";
+
+dotenv.config();
 
 const app = express();
 const port = 3000;
@@ -17,6 +22,9 @@ app.use(
 );
 
 app.use('/users', usersRouter);
+
+app.use(errorHandler);
+app.use(notFoundHandler)
 
 app.listen(port, () => {
   console.log(`app listening on ${port}`);

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
-import useUser from "../userContext/useUser";
 import { useEffect } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 
 interface Props {
   children: React.ReactNode;
@@ -8,8 +8,8 @@ interface Props {
 
 export default function ProtectedRoute({ children }: Props) {
   const navigate = useNavigate();
-  const { isAuthenticated } = useUser();
-  
+  const { isAuthenticated } = useAuth0();
+  console.log(isAuthenticated)
   useEffect(()=>{
     if (!isAuthenticated) navigate("/");   
   },[isAuthenticated])

@@ -1,7 +1,10 @@
 import { Link, NavLink, Outlet } from "react-router";
 import "./Home.css";
+import { useAuth0 } from "@auth0/auth0-react";
 
-export default function Home() {
+export default function HomeLayout() {
+  const {loginWithRedirect} = useAuth0();
+
   return (
     <>
       <header className="home-head">
@@ -25,7 +28,7 @@ export default function Home() {
           </nav>
         </div>
         <div>
-          <Link to={"/logIn"}>Log In</Link>
+          <button onClick={()=> loginWithRedirect()}>Log in</button>
         </div>
       </header>
       <Outlet />

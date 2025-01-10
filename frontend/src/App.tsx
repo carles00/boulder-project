@@ -1,33 +1,28 @@
 import { Route, Routes, useNavigate } from "react-router";
 import "./App.css";
-import useUser from "./lib/userContext/useUser";
-import AuthLayout from "./pages/Auth/AuthLayout";
-import SignIn from "./pages/Auth/SignIn/SignIn";
-import SignUp from "./pages/Auth/SignUp/SignUp";
 import ProtectedRoute from "./lib/ProtectedRoute/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
-import Home from "./pages/Home/Home";
+import HomeLayout from "./pages/Home/HomeLayout";
 import { useEffect } from "react";
 import GymsHome from "./pages/Home/GymsHome/GymsHome";
-import GymSignUp from "./pages/Auth/SignUp/GymSignUp";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function App() {
-  const { isAuthenticated } = useUser();
-  const navigate = useNavigate();
-
+  const { isAuthenticated, isLoading } = useAuth0();
+  const navigate = useNavigate(); 
   useEffect(() => {
     if (isAuthenticated) navigate("/dashboard");
   }, [isAuthenticated]);
 
+  if(isLoading){
+    return <div>Loading User...</div>
+  }
+
   return (
     <div className="grid-container">
       <Routes>
-        <Route path="*" element={<Home />}>
-          <Route element={<AuthLayout />}>
-            <Route index element={<SignUp />} />
-            <Route path="logIn" element={<SignIn />} />
-            <Route path="signUp/gym" element={<GymSignUp/>}/>
-          </Route>
+        <Route path="*" element={<HomeLayout />}>
+
           <Route path="gyms" element={<GymsHome />} />
         </Route>
         <Route

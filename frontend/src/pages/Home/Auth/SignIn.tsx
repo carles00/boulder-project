@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
 import useUser from "../../../lib/userContext/useUser";
 import FormComponent from "../../../lib/components/Form";
+import { LoginUser } from "../../../api/Users";
 
 interface IFormInput {
   username: string;
@@ -18,17 +19,10 @@ export default function SignIn() {
   const onSubmit: SubmitHandler<IFormInput> = (data) => loginRequest(data);
 
   async function loginRequest(input: IFormInput) {
-    const userData = {
+    let response = await LoginUser({
       user: input.username,
       password: input.password,
-    };
-
-    const queryParams = new URLSearchParams(userData);
-
-    const url = `${import.meta.env.VITE_API_URL}/users?`;
-    const uri = url + queryParams.toString();
-
-    let response = await fetch(uri);
+    });
 
     if (response.ok) {
       setLoginError("");

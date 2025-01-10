@@ -1,7 +1,7 @@
 import { Outlet } from "react-router";
 import './AuthLayout.css'
-import image1 from "../../assets/images/homeImage1.webp"
-import image2 from "../../assets/images/homeImage2.webp"
+import image1 from '../../../assets/images/homeImage1.webp'
+import image2 from "../../../assets/images/homeImage2.webp"
 
 export default function AuthLayout(){
   return(

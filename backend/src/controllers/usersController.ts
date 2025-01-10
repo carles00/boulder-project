@@ -1,14 +1,19 @@
 import express from "express";
 import prisma from "../utils/prismaClient";
-import { User } from "../types/user";
+import { RequestUser, User, UserWithPassword } from "../types/user";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import PrismaErrorHandler from "../utils/prismaErrorHandler";
 import bcrypt from "bcrypt";
+import { validateAccessToken } from "../middleware/auth";
 
 const router = express.Router();
 
+router.get('/test', validateAccessToken, async (req, res) => {
+  res.status(200).send({text: 'ok'});
+});
+
 router.post("", async (req, res) => {
-  let user = req.body as User;
+  let user = req.body as UserWithPassword;
   if (!user.username || !user.email || !user.password) res.sendStatus(400);
 
   bcrypt.hash(user.password!, 2, async function (err, hash) {
@@ -21,7 +26,8 @@ router.post("", async (req, res) => {
           password: hash,
         },
       });
-      res.status(200).send(userCreated);
+
+      res.status(200).send(userCreated as RequestUser);
     } catch (ex) {
       if (ex instanceof PrismaClientKnownRequestError)
         res.status(400).send("Unable to create user");
@@ -60,7 +66,8 @@ router.get("", async (req, res) => {
     if (user) {
       bcrypt.compare(password, user.password, function (err, result) {
         if (result) {
-          user.password = "";
+          let userPayload : User = {...user}
+          console.log(userPayload)
           res.send(user);
         } else {
           res.sendStatus(403);

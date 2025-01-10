@@ -1,10 +1,15 @@
 export interface User {
-  id?: number;
+  id: number;
   email: string;
   username: string;
-  password: string;
-  name?: string;
-  picture?: string;
-  description?: string;
-  gymId?: number;
+  name: string | null;
+  picture: string | null;
+  description: string | null;
+  gymId: number | null;
 }
+
+export interface UserWithPassword extends User{
+  password: string;
+}
+
+export type RequestUser = Omit<User, "password">

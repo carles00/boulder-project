@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
 import useUser from "../../../lib/userContext/useUser";
 import FormComponent from "../../../lib/components/Form";
+import { RegisterUser } from "../../../api/Users";
 
 interface IFormInput {
   email: string;
@@ -13,24 +14,16 @@ interface IFormInput {
 export default function SignUp() {
   const { register, handleSubmit } = useForm<IFormInput>();
   const [registerError, setRegisterError] = useState("");
-  const onSubmit: SubmitHandler<IFormInput> = (data) => registerRequest(data);
   const { addUser } = useUser();
   const navigate = useNavigate();
+  
+  const onSubmit: SubmitHandler<IFormInput> = (data) => registerRequest(data);
 
   async function registerRequest(input: IFormInput) {
-    const userData = {
+    let response = await RegisterUser({
       email: input.email,
       password: input.password,
       username: input.username,
-    };
-
-    const url = `${import.meta.env.VITE_API_URL}/users`;
-    let response = await fetch(url, {
-      method: "POST",
-      body: JSON.stringify(userData),
-      headers: {
-        "Content-Type": "application/json",
-      },
     });
 
     if (response.ok) {
