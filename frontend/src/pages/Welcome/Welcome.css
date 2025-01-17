@@ -1,0 +1,10 @@
+.welcome-container{
+  grid-column: 3/4;
+  grid-row: 2/3;
+  background-color: var(--white);
+  border: solid 1px var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

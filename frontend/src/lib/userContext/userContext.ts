@@ -2,10 +2,10 @@ import { createContext } from "react";
 import { User } from "../../types/User";
 
 interface IUserContext{
-  isAuthenticated: boolean,
+  isLoaded: boolean,
   user: User | null,
-  addUser: (user: User) => void,
-  removeUser: () => void
+  loadUser: () => Promise<void>,
+  setupUser: boolean;
 }
 
 

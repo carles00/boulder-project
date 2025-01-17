@@ -13,8 +13,7 @@ createRoot(document.getElementById("root")!).render(
         clientId={import.meta.env.VITE_AUTH0_CLIENT}
         authorizationParams={{
           redirect_uri: import.meta.env.VITE_AUTH0_LOGIN_REDIRECT,
-          audience: import.meta.env.VITE_AUTH0_AUDIENCE,
-          scope: "read:current_user update:current_user_metadata"
+          audience: import.meta.env.VITE_AUTH0_AUDIENCE
         }}
       >
         <App />

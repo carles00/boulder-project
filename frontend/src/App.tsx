@@ -6,6 +6,7 @@ import HomeLayout from "./pages/Home/HomeLayout";
 import { useEffect } from "react";
 import GymsHome from "./pages/Home/GymsHome/GymsHome";
 import { useAuth0 } from "@auth0/auth0-react";
+import UserProvider from "./lib/userContext/userProvider";
 
 function App() {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -22,17 +23,18 @@ function App() {
     <div className="grid-container">
       <Routes>
         <Route path="*" element={<HomeLayout />}>
-
           <Route path="gyms" element={<GymsHome />} />
         </Route>
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
+        <Route element={<UserProvider/>}>
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+            />
+          </Route>
       </Routes>
     </div>
   );

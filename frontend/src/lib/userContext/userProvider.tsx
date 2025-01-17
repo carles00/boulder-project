@@ -1,38 +1,38 @@
-import { ReactNode, useEffect, useState } from "react";
+import { useState } from "react";
 import { UserContext } from "./userContext";
 import { User } from "../../types/User";
+import { Outlet } from "react-router";
+import { GetUser } from "../../api/UsersApi";
+import { useAuth0 } from "@auth0/auth0-react";
 
-interface Props {
-  children: ReactNode;
-  userString: string | null;
-}
-
-export default function UserProvider({ children, userString }: Props) {
+export default function UserProvider() {
   const [user, setUser] = useState<User | null>(null);
+  const [setupUser, setSetupUser] = useState(false);
+  const {getAccessTokenSilently} = useAuth0();
 
-  useEffect(() => {
-    if (userString) setUser(JSON.parse(userString));
-  }, [userString]);
+  const isLoaded = (): boolean => user !== null || setupUser;
 
-  const isAuthenticated = (): boolean => user !== null;
-
-  const addUser = (user: User) => {
-    setUser(user);
-    localStorage.setItem("blocker_user", JSON.stringify(user));
+  const loadUser = async () => {
+    const token = await getAccessTokenSilently();
+    let response = await GetUser(token)
+    if(response.ok){
+      const userBody = await response.json();
+      setUser(userBody)
+    }else{
+      setSetupUser(true);
+    }
   };
-
-  const removeUser = () => setUser(null);
 
   return (
     <UserContext.Provider
       value={{
-        isAuthenticated: isAuthenticated(),
+        isLoaded: isLoaded(),
         user: user,
-        addUser: addUser,
-        removeUser: removeUser,
+        loadUser: loadUser,
+        setupUser: setupUser
       }}
     >
-      {children}
+      <Outlet/>
     </UserContext.Provider>
   );
 }

@@ -3,7 +3,6 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
 import useUser from "../../../lib/userContext/useUser";
 import FormComponent from "../../../lib/components/Form";
-import { LoginUser } from "../../../api/Users";
 
 interface IFormInput {
   username: string;

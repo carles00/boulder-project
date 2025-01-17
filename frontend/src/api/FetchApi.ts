@@ -11,12 +11,15 @@ export async function Get(uri: string, token?: string){
   });
 }
 
-export async function Post<T>(uri: string, data: T) {
+export async function Post<T>(uri: string,  data: T, token?:string,) {
+  const headers : HeadersInit = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  }
+
   return await fetch(uri, {
     method: "POST",
     body: JSON.stringify(data),
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: headers
   });
 }
