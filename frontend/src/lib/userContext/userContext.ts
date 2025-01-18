@@ -6,6 +6,7 @@ interface IUserContext{
   user: User | null,
   loadUser: () => Promise<void>,
   setupUser: boolean;
+  createDbUser: (user: User) => Promise<void>
 }
 
 

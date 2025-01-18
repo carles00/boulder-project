@@ -14,58 +14,58 @@ datasource db {
 }
 
 model User {
-  id              Int         @id @default(autoincrement())
-  email           String      @unique
-  username        String      @unique
-  password        String
-  name            String?
-  picture         String?
-  description     String?
-  gymId           Int?
-  attemptedRoutes UserRoute[]
-  followedBy      User[]      @relation("UserFollows")
-  following       User[]      @relation("UserFollows")
-  gym             Gym?        @relation(name: "gymOwner")
-  favouriteGym    Gym?        @relation(name: "favouriteGym", fields: [gymId], references: [id])
+  sub            String  @id
+  username       String  @unique
+  email          String  @unique
+  description    String?
+  uploadedRoutes Route[]
+  followedBy     User[]  @relation("UserFollows")
+  following      User[]  @relation("UserFollows")
+  //gymId          Int?
+  //attemptedRoutes UserRoute[]
+  // gym             Gym?        @relation(name: "gymOwner")
+  // favouriteGym    Gym?        @relation(name: "favouriteGym", fields: [gymId], references: [id])
 }
 
-model Gym {
-  id          Int     @id @default(autoincrement())
-  name        String
-  email       String  @unique
-  address     String
-  rating      Int     @default(0)
-  description String?
-  website     String?
-  phone       String?
-  logo        String?
-  owner       User    @relation(name: "gymOwner", fields: [id], references: [id])
-  routes      Route[]
-  users       User[]  @relation(name: "favouriteGym")
-  userId      Int
-}
+// model Gym {
+//   id          Int     @id @default(autoincrement())
+//   name        String
+//   email       String  @unique
+//   address     String
+//   rating      Int     @default(0)
+//   description String?
+//   website     String?
+//   phone       String?
+//   logo        String?
+//   owner       User    @relation(name: "gymOwner", fields: [id], references: [id])
+//   users       User[]  @relation(name: "favouriteGym")
+//   userId      Int
+// }
 
 model Route {
-  id          Int         @id @default(autoincrement())
-  gymId       Int
+  id          Int      @id @default(autoincrement())
+  userId      String
   name        String
   grade       String
   picture     String
   description String?
   sctive      Boolean
   setDate     DateTime
-  gym         Gym         @relation(fields: [gymId], references: [id])
-  attempts    UserRoute[]
+  user        User     @relation(fields: [userId], references: [sub])
+  tries       Int      @default(0)
+  completed   Boolean  @default(false)
+  rating      Int      @default(0)
+  //attempts    UserRoute[]
 }
 
-model UserRoute {
-  userId    Int
-  routeId   Int
-  tires     Int     @default(0)
-  completed Boolean @default(false)
-  rating    Int     @default(0)
-  User      User    @relation(fields: [userId], references: [id])
-  Route     Route   @relation(fields: [routeId], references: [id])
+// model UserRoute {
+//   userId    Int
+//   routeId   Int
+//   tires     Int     @default(0)
+//   completed Boolean @default(false)
+//   rating    Int     @default(0)
+//   User      User    @relation(fields: [userId], references: [id])
+//   Route     Route   @relation(fields: [routeId], references: [id])
 
-  @@id([userId, routeId])
-}
+//   @@id([userId, routeId])
+// }

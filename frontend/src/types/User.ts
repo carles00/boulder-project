@@ -1,5 +1,6 @@
 export interface User{
   sub: string, 
+  email: string,
   username: string,
   description?: string,
   //uploadedRoutes: Route[],

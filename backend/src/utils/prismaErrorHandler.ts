@@ -5,10 +5,10 @@ export default function PrismaErrorHandler(res: Response, error: PrismaClientKno
  
   switch(error.code){
     case 'P2025':
-      res.status(404).send("resource not found");
+      res.status(404).send("RESOURCE_NOT_FOUND");
     break;
     default:
-      res.status(500).send("unhandled prsima error")
+      res.status(500).send("UNEXPECTED_ERROR")
       break;
   }
 }

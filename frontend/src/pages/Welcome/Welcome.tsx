@@ -1,9 +1,9 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import FormComponent from "../../lib/components/Form";
 import { useAuth0 } from "@auth0/auth0-react";
-import { CreateUser } from "../../api/UsersApi";
 import "./Welcome.css";
-import { useNavigate } from "react-router";
+import useUser from "../../lib/userContext/useUser";
+import { User } from "../../types/User";
 
 interface IFormInput {
   username: string;
@@ -12,17 +12,14 @@ interface IFormInput {
 
 export default function Welcome() {
   const { register, handleSubmit } = useForm<IFormInput>();
-  const { getAccessTokenSilently, user } = useAuth0();
-  const navigate = useNavigate();
+  const {user} = useAuth0();
+  const {createDbUser} = useUser();
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => createDbUser(data);
+  const onSubmit: SubmitHandler<IFormInput> = (data) => createUser(data);
 
-  const createDbUser = async (input: IFormInput) => {
-    const token = await getAccessTokenSilently();
-    const response = await CreateUser(token, user!, input.username);
-    if(response.ok){
-      navigate("/dashboard")
-    } 
+  const createUser = async (input: IFormInput) => {
+    const newUser : User = { sub: user!.sub!, email: user!.email!, username: input.username }
+    await createDbUser(newUser)
   };
 
   return (

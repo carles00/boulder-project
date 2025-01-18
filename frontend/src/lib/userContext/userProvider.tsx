@@ -2,7 +2,7 @@ import { useState } from "react";
 import { UserContext } from "./userContext";
 import { User } from "../../types/User";
 import { Outlet } from "react-router";
-import { GetUser } from "../../api/UsersApi";
+import { CreateUser, GetUser } from "../../api/UsersApi";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export default function UserProvider() {
@@ -23,13 +23,24 @@ export default function UserProvider() {
     }
   };
 
+  const createDbUser = async (user: User) => {
+    const token = await getAccessTokenSilently();
+    const response = await CreateUser(token, user);
+    if(response.ok){
+      const createdUser = await response.json();
+      setUser(createdUser);
+      setSetupUser(false)
+    }
+  }
+
   return (
     <UserContext.Provider
       value={{
         isLoaded: isLoaded(),
         user: user,
         loadUser: loadUser,
-        setupUser: setupUser
+        setupUser: setupUser,
+        createDbUser: createDbUser
       }}
     >
       <Outlet/>

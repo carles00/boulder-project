@@ -1,15 +1,11 @@
+import { Route } from "./route";
+
 export interface User {
-  id: number;
-  email: string;
-  username: string;
-  name: string | null;
-  picture: string | null;
-  description: string | null;
-  gymId: number | null;
+  sub: string, 
+  email: string,
+  username: string,
+  description?: string,
+  uploadedRoutes: Route[],
+  followedBy: User[],
+  following: User[],
 }
-
-export interface UserWithPassword extends User{
-  password: string;
-}
-
-export type RequestUser = Omit<User, "password">

@@ -7,12 +7,11 @@ export async function GetUser(token: string) {
   return await Get(url, token);
 }
 
-export async function CreateUser(token: string, user: User, username: string) {
+export async function CreateUser(token: string, user: User ) {
   const url = `${getApiUrl()}/users`;
-  console.log(user);
   return await Post(
     url,
-    { sub: user.sub, email: user.email, username: username },
+    user,
     token
   );
 }
