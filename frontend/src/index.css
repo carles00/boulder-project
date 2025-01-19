@@ -17,8 +17,9 @@
   --danger: #c01717;
   --border-subtle: #e0e0e0;
   --footer: #ded3c7;
+  --background: #3f3a34;
 
-  --font-color: #212121;
+  --font-color: #fff2e4;
 
   color-scheme: light;
   color: var(--font-color);
@@ -37,11 +38,9 @@ html, body {
 }
 
 body{
-  background: radial-gradient(var(--secondary-light) 3%, transparent 3%),
-    radial-gradient(var(--secondary-light) 3%, transparent 3%);
   background-size: 150px 150px;
   background-position: 0 0, 75px 75px;
-  background-color: var(--primary);
+  background-color: var(--background)
 }
 
 div{
@@ -69,6 +68,18 @@ input{
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
+}
+
+button {
+  background-color: var(--highlight);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+
+.font-highlight{
+  color: var(--highlight);
 }
 
 .grid-container{

@@ -46,13 +46,8 @@
 }
 
 .form-button {
-  background-color: var(--highlight);
   height: 24px;
   padding: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
   font-size: large;
 }
 
