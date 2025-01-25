@@ -1,17 +1,17 @@
 import { Route, Routes, useNavigate } from "react-router";
 import "./App.css";
 import ProtectedRoute from "./lib/ProtectedRoute/ProtectedRoute";
-import Dashboard from "./pages/Dashboard";
-import HomeLayout from "./pages/Home/Home";
+import Feed from "./pages/Feed/Feed";
 import { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import UserProvider from "./lib/userContext/userProvider";
+import LandingPage from "./pages/Landing/Landing";
 
 function App() {
   const { isAuthenticated, isLoading } = useAuth0();
   const navigate = useNavigate(); 
   useEffect(() => {
-    if (isAuthenticated) navigate("/dashboard");
+    if (isAuthenticated) navigate("/feed");
   }, [isAuthenticated]);
 
   if(isLoading){
@@ -19,21 +19,19 @@ function App() {
   }
 
   return (
-    <div className="grid-container">
       <Routes>
-        <Route path="*" element={<HomeLayout />}/>
+        <Route path="*" element={<LandingPage />}/>
         <Route element={<UserProvider/>}>
           <Route
-            path="/dashboard"
+            path="/feed"
             element={
               <ProtectedRoute>
-                <Dashboard />
+                <Feed />
               </ProtectedRoute>
             }
             />
           </Route>
       </Routes>
-    </div>
   );
 }
 

@@ -19,10 +19,11 @@
   --footer: #ded3c7;
   --background: #3f3a34;
 
-  --font-color: #fff2e4;
+  --font-light: var(--primary);
+  --font-dark: var(--secondary);
 
   color-scheme: light;
-  color: var(--font-color);
+  color: var(--font-light);
   
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -37,23 +38,21 @@ html, body {
   padding: 0px;
 }
 
-body{
-  background-size: 150px 150px;
-  background-position: 0 0, 75px 75px;
-  background-color: var(--background)
-}
-
 div{
   box-sizing: border-box;
 }
 
+p{
+  margin: 0;
+}
+
 a{
   text-decoration: none;
-  color: var(--font-color) ;
+  color: var(--font-light) ;
 }
 
 a:hover {
-  color: var(--font-color);
+  color: var(--font-light);
 }
 
 button:hover{
@@ -80,12 +79,4 @@ button {
 
 .font-highlight{
   color: var(--highlight);
-}
-
-.grid-container{
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
-  grid-template-rows: 1fr 9fr 2fr;
 }

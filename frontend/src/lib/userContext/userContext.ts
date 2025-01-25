@@ -3,7 +3,7 @@ import { User } from "../../types/User";
 
 interface IUserContext{
   isLoaded: boolean,
-  user: User | null,
+  dbUser: User | null,
   loadUser: () => Promise<void>,
   setupUser: boolean;
   createDbUser: (user: User) => Promise<void>

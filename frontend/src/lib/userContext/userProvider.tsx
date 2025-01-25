@@ -37,7 +37,7 @@ export default function UserProvider() {
     <UserContext.Provider
       value={{
         isLoaded: isLoaded(),
-        user: user,
+        dbUser: user,
         loadUser: loadUser,
         setupUser: setupUser,
         createDbUser: createDbUser
