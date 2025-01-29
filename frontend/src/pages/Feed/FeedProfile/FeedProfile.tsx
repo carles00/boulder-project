@@ -1,6 +1,8 @@
 import "./FeedProfile.css";
 import useUser from "../../../lib/userContext/useUser";
 import { useAuth0 } from "@auth0/auth0-react";
+import useApi from "../../../lib/hooks/useApi";
+import { useEffect } from "react";
 
 interface Props {
   className: string;
@@ -9,6 +11,11 @@ interface Props {
 export default function FeedProfile({className}:Props) {
   const { dbUser } = useUser();
   const { user, logout } = useAuth0();
+  const {getUser} = useApi()
+
+  useEffect(()=>{
+    getUser()
+  },[])
 
   return (
     <div className={className}>

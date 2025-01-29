@@ -23,7 +23,6 @@ export default function ProtectedRoute({ children }: Props) {
   }
 
   if(isLoaded){
-    console.log(setupUser)
     if(!setupUser)
         return children
     else
