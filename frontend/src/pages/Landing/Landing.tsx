@@ -16,7 +16,7 @@ export default function LandingPage() {
         <div className="landing__info__subtitle">
           <span className="font-highlight">TRACK</span>.
           <span className="font-highlight">SHARE</span>.
-          <span className="font-highlight">IMPROVE</span>.
+          <span className="font-highlight">IMPROVE</span>
         </div>
         <div className="landing__info__login">
           <button

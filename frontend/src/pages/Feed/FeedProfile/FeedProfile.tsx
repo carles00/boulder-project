@@ -1,21 +1,23 @@
 import "./FeedProfile.css";
 import useUser from "../../../lib/userContext/useUser";
 import { useAuth0 } from "@auth0/auth0-react";
-import useApi from "../../../lib/hooks/useApi";
 import { useEffect } from "react";
+import { useNavigate } from "react-router";
 
 interface Props {
   className: string;
 }
 
 export default function FeedProfile({className}:Props) {
-  const { dbUser } = useUser();
-  const { user, logout } = useAuth0();
-  const {getUser} = useApi()
+  const navigate = useNavigate()
+  const { user } = useUser();
+  const { logout } = useAuth0();
 
-  useEffect(()=>{
-    getUser()
-  },[])
+  useEffect(()=> {
+    if(!user?.completedSetup){
+      navigate('/profile')
+    }
+  }, [user])
 
   return (
     <div className={className}>
@@ -25,7 +27,7 @@ export default function FeedProfile({className}:Props) {
         </div>
         <div className="profile-card-container">
           <div className="profile-card">
-            <p className="profile-card-username">{dbUser?.username}</p>
+            <p className="profile-card-username">{user?.username}</p>
             <div className="profile-summary">
               <div>followed</div>
               <div>followers</div>

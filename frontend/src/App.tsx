@@ -1,11 +1,11 @@
-import { Route, Routes, useNavigate } from "react-router";
 import "./App.css";
-import ProtectedRoute from "./lib/ProtectedRoute/ProtectedRoute";
+import { Route, Routes, useNavigate } from "react-router";
 import Feed from "./pages/Feed/Feed";
 import { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import UserProvider from "./lib/userContext/userProvider";
 import LandingPage from "./pages/Landing/Landing";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -25,12 +25,16 @@ function App() {
           <Route
             path="/feed"
             element={
-              <ProtectedRoute>
                 <Feed />
-              </ProtectedRoute>
             }
             />
           </Route>
+          <Route
+            path="/profile"
+            element={
+                <Profile/>
+            }
+          />
       </Routes>
   );
 }

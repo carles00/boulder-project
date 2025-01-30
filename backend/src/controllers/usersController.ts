@@ -3,7 +3,6 @@ import prisma from "../utils/prismaClient";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import PrismaErrorHandler from "../utils/prismaErrorHandler";
 import { validateAccessToken } from "../middleware/auth";
-import { User } from "../types/user";
 
 const router = express.Router();
 
@@ -12,14 +11,15 @@ router.get("/test", validateAccessToken, async (req, res) => {
 });
 
 router.post("", validateAccessToken, async (req, res) => {
-  const user = req.body as User;
+  const user = req.body as {sub: string, email: string, nickname: string, picture: string};
 
   try {
     let userCreated = await prisma.user.create({
       data: {
         sub: user.sub,
         email: user.email,
-        username: user.username,
+        username: user.nickname,
+        picture: user.picture
       },
     });
 

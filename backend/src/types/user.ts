@@ -8,4 +8,5 @@ export interface User {
   uploadedRoutes: Route[],
   followedBy: User[],
   following: User[],
+  completedSetup: boolean
 }

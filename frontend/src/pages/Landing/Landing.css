@@ -30,9 +30,10 @@
 }
 
 .landing__info__login__button{
-  padding: 25px;
+  padding: .6em 1em;
   font-size: 2rem;
   color: var(--primary);
+  border-radius: 1%;
 }
 
 .landing__info__login{
@@ -58,7 +59,7 @@
 }
 
 @media (min-width: 500px) {
-  .landing-container{
+  .landing{
     grid-template-columns: 3fr 2fr;
   }
 

@@ -1,49 +1,44 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UserContext } from "./userContext";
 import { User } from "../../types/User";
 import { Outlet } from "react-router";
-import { CreateUser, GetUser } from "../../api/UsersApi";
+import useApi from "../hooks/useApi";
 import { useAuth0 } from "@auth0/auth0-react";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 export default function UserProvider() {
-  const [user, setUser] = useState<User | null>(null);
-  const [setupUser, setSetupUser] = useState(false);
-  const {getAccessTokenSilently} = useAuth0();
+  const [dbUser, setUser] = useState<User | null>(null);
+  const {getUser, createUser} = useApi()
+  const {user} = useAuth0();
 
-  const isLoaded = (): boolean => user !== null || setupUser;
+  useEffect(()=>{
+    console.log(dbUser)
+  },[dbUser])
+
+  const isLoaded = (): boolean => dbUser !== null;
 
   const loadUser = async () => {
-    const token = await getAccessTokenSilently();
-    let response = await GetUser(token)
+    let response = await getUser();
     if(response.ok){
-      const userBody = await response.json();
+      const userBody = await response.json() as User;
       setUser(userBody)
     }else{
-      setSetupUser(true);
+      const userBody = await (await createUser(user)).json() as User;
+      setUser(userBody);
     }
   };
-
-  const createDbUser = async (user: User) => {
-    const token = await getAccessTokenSilently();
-    const response = await CreateUser(token, user);
-    if(response.ok){
-      const createdUser = await response.json();
-      setUser(createdUser);
-      setSetupUser(false)
-    }
-  }
 
   return (
     <UserContext.Provider
       value={{
         isLoaded: isLoaded(),
-        dbUser: user,
-        loadUser: loadUser,
-        setupUser: setupUser,
-        createDbUser: createDbUser
+        user: dbUser,
+        loadUser: loadUser
       }}
     >
-      <Outlet/>
+      <ProtectedRoute>
+        <Outlet/>
+      </ProtectedRoute>
     </UserContext.Provider>
   );
 }

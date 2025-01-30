@@ -14,10 +14,13 @@ datasource db {
 }
 
 model User {
-  sub            String  @id
+  id             Int     @id @default(autoincrement())
+  sub            String 
   username       String  @unique
   email          String  @unique
   description    String?
+  completedSetup Boolean @default(false)
+  picture        String? 
   uploadedRoutes Route[]
   followedBy     User[]  @relation("UserFollows")
   following      User[]  @relation("UserFollows")
@@ -51,7 +54,7 @@ model Route {
   description String?
   sctive      Boolean
   setDate     DateTime
-  user        User     @relation(fields: [userId], references: [sub])
+  user        User     @relation(fields: [id], references: [id])
   tries       Int      @default(0)
   completed   Boolean  @default(false)
   rating      Int      @default(0)

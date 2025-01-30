@@ -3,10 +3,8 @@ import { User } from "../../types/User";
 
 interface IUserContext{
   isLoaded: boolean,
-  dbUser: User | null,
-  loadUser: () => Promise<void>,
-  setupUser: boolean;
-  createDbUser: (user: User) => Promise<void>
+  user: User | null,
+  loadUser: () => Promise<void>
 }
 
 
