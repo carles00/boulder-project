@@ -1,9 +1,5 @@
-import './Profile.css'
+import "./Profile.css";
 
-export default function Profile(){
-  return(
-    <div className="profile">
-    
-    </div>
-  )
+export default function Profile() {
+  return <div className="text-3xl font-bold underline">Hola!</div>;
 }
