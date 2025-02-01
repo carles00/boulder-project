@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { UserContext } from "./userContext";
 import { User } from "../../types/User";
 import { Outlet } from "react-router";
@@ -10,10 +10,6 @@ export default function UserProvider() {
   const [dbUser, setUser] = useState<User | null>(null);
   const {getUser, createUser} = useApi()
   const {user} = useAuth0();
-
-  useEffect(()=>{
-    console.log(dbUser)
-  },[dbUser])
 
   const isLoaded = (): boolean => dbUser !== null;
 

@@ -1,5 +1,4 @@
-import "./Feed.css"
-import FeedProfile from "./FeedProfile/FeedProfile";
+import FeedProfile from "./FeedProfile";
 
 export default function Feed(){
   return(

@@ -1,4 +1,3 @@
-import "./App.css";
 import { Route, Routes, useNavigate } from "react-router";
 import Feed from "./pages/Feed/Feed";
 import { useEffect } from "react";
@@ -9,33 +8,23 @@ import Profile from "./pages/Profile/Profile";
 
 function App() {
   const { isAuthenticated, isLoading } = useAuth0();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   useEffect(() => {
     if (isAuthenticated) navigate("/feed");
   }, [isAuthenticated]);
 
-  if(isLoading){
-    return <div>Loading User...</div>
+  if (isLoading) {
+    return <div>Loading User...</div>;
   }
 
   return (
-      <Routes>
-        <Route path="*" element={<LandingPage />}/>
-        <Route element={<UserProvider/>}>
-          <Route
-            path="/feed"
-            element={
-                <Feed />
-            }
-            />
-          </Route>
-          <Route
-            path="/profile"
-            element={
-                <Profile/>
-            }
-          />
-      </Routes>
+    <Routes>
+      <Route path="*" element={<LandingPage />} />
+      <Route element={<UserProvider />}>
+        <Route path="/feed" element={<Feed />} />
+        <Route path="/profile" element={<Profile />} />
+      </Route>
+    </Routes>
   );
 }
 

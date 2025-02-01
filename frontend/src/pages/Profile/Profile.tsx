@@ -1,5 +1,12 @@
-import "./Profile.css";
+import useUser from "../../lib/userContext/useUser"
 
 export default function Profile() {
-  return <div className="text-3xl font-bold underline">Hola!</div>;
+  const {isLoaded} = useUser();
+
+  
+  return (
+    <div className="grid h-screen bg-slate-50">
+      hola!
+    </div>
+  )
 }

@@ -1,4 +1,3 @@
-import "./Form.css";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { FormEventHandler, ReactNode } from "react";
 
