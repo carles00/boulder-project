@@ -5,6 +5,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import UserProvider from "./lib/userContext/userProvider";
 import LandingPage from "./pages/Landing/Landing";
 import Profile from "./pages/Profile/Profile";
+import MainLayout from "./components/MainLayout";
 
 function App() {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -21,8 +22,10 @@ function App() {
     <Routes>
       <Route path="*" element={<LandingPage />} />
       <Route element={<UserProvider />}>
-        <Route path="/feed" element={<Feed />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route element={<MainLayout/>}>
+          <Route path="/feed" element={<Feed />} />
+          <Route path="/profile" element={<Profile />} />
+        </Route>
       </Route>
     </Routes>
   );

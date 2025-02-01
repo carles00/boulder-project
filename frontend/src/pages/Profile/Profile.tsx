@@ -1,12 +1,12 @@
-import useUser from "../../lib/userContext/useUser"
+import useUser from "../../lib/userContext/useUser";
 
 export default function Profile() {
-  const {isLoaded} = useUser();
+  const { user } = useUser();
 
-  
   return (
-    <div className="grid h-screen bg-slate-50">
-      hola!
-    </div>
-  )
+    <main className="col-start-2">
+      <img src={user?.picture} className="profile-picture" />
+      {user?.username}
+    </main>
+  );
 }
