@@ -1,5 +1,4 @@
 import useUser from "../../lib/userContext/useUser";
-import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
@@ -10,7 +9,6 @@ interface Props {
 export default function FeedProfile({className}:Props) {
   const navigate = useNavigate()
   const { user } = useUser();
-  const { logout } = useAuth0();
 
   useEffect(()=> {
     if(!user?.completedSetup){
@@ -37,7 +35,7 @@ export default function FeedProfile({className}:Props) {
         <div className="profile-aditional">
           <button
             onClick={() => {
-              logout();
+              
             }}
           >
             logout

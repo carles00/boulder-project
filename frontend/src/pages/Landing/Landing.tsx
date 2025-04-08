@@ -1,7 +1,4 @@
-import { useAuth0 } from "@auth0/auth0-react";
-
 export default function LandingPage() {
-  const { loginWithRedirect } = useAuth0();
 
   return (
     <div className="grid w-screen h-screen font-montserrat md:grid-cols-7">
@@ -20,7 +17,7 @@ export default function LandingPage() {
           <button
             className="bg-lime-600 transition-colors rounded-sm p-4 text-2xl font-bold text-orange-100 hover:cursor-pointer hover:bg-lime-700"
             onClick={() => {
-              loginWithRedirect();
+              
             }}
           >
             Log in

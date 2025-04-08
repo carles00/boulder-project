@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
 import useUser from "../userContext/useUser";
 
 interface Props {
@@ -9,13 +8,8 @@ interface Props {
 
 export default function ProtectedRoute({ children }: Props) {
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth0();
   const {isLoaded, loadUser} = useUser();
 
-  useEffect(()=>{
-    if (!isAuthenticated) navigate("/");
-    else GetDbUser();
-  },[isAuthenticated])
 
   const GetDbUser = async () => {
     await loadUser();
