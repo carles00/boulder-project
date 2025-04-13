@@ -11,7 +11,7 @@ function App() {
     <Routes>
       <Route path="*" element={<LandingPage />} />
       <Route element={<AuthLayout />}>
-        <Route path="/login" element={<LoginPage/>}/>
+        <Route path="/login" element={<LoginPage />} />
       </Route>
       <Route element={<MainLayout />}>
         <Route path="/feed" element={<Feed />} />

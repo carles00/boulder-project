@@ -1,15 +1,9 @@
-import { useEffect } from "react";
 import useUser from "../../context/userContext/useUser";
-import { useNavigate } from "react-router";
+import useUserAuthenticated from "../../hooks/useUserAuthenticated";
 
 export default function LoginPage() {
-  const {user,logIn} = useUser();
-  const navigate = useNavigate();
-  useEffect(()=>{
-    if(user){
-      navigate('/feed')
-    }
-  },[user]);
+  useUserAuthenticated();
+  const {logIn} = useUser();
 
   return (
     <>

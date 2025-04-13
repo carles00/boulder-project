@@ -1,23 +1,25 @@
 import useUser from "../../context/userContext/useUser";
-import { useNavigate } from "react-router";
 
 interface Props {
   className: string;
 }
 
-export default function FeedProfile({className}:Props) {
-  const navigate = useNavigate()
+export default function FeedProfile({ className }: Props) {
   const { user, logOut } = useUser();
 
   return (
     <div className={className}>
       <aside className="dashboard-profile">
         <div className="profile-picture-container">
-          <img src={user?.image!} className="profile-picture" />
+          {user && user.image && (
+            <img src={user.image} className="profile-picture" />
+          )}
         </div>
         <div className="profile-card-container">
           <div className="profile-card">
-            <p className="profile-card-username">{user?.name!}</p>
+            {user && user.name && (
+              <p className="profile-card-username">{user.name}</p>
+            )}
             <div className="profile-summary">
               <div>followed</div>
               <div>followers</div>

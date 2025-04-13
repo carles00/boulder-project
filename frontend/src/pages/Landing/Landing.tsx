@@ -1,7 +1,6 @@
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 
 export default function LandingPage() {
-  const {} = useNavigate();
   return (
     <div className="grid h-screen w-screen font-montserrat md:grid-cols-7">
       <main className="col-span-4 flex flex-col items-center justify-center gap-20 bg-stone-600">
