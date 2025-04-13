@@ -1,58 +1,17 @@
 import express from "express";
-import prisma from "../utils/prismaClient";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
-import PrismaErrorHandler from "../utils/prismaErrorHandler";
-import { validateAccessToken } from "../middleware/auth";
 
 const router = express.Router();
 
-router.get("/test", validateAccessToken, async (req, res) => {
+router.get("/test", async (req, res) => {
   res.status(200).send({ text: "ok" });
 });
 
-router.post("", validateAccessToken, async (req, res) => {
-  const user = req.body as {sub: string, email: string, nickname: string, picture: string};
-
-  try {
-    let userCreated = await prisma.user.create({
-      data: {
-        sub: user.sub,
-        email: user.email,
-        username: user.nickname,
-        picture: user.picture
-      },
-    });
-
-    res.status(200).send(userCreated);
-  } catch (ex) {
-    if (ex instanceof PrismaClientKnownRequestError)
-      res.status(400).send("Unable to create user");
-    else throw ex;
-  }
+router.post("", async (req, res) => {
+  
 });
 
-router.get("", validateAccessToken, async (req, res) => {
-  let sub = req.auth?.payload.sub!
-  try {
-    let user = await prisma.user.findFirstOrThrow({
-      where: {
-        OR: [
-          {
-            sub: {
-              equals: sub
-            },
-          },
-        ],
-      },
-    });
-
-    res.status(200).send(user);
-
-  } catch (error) {
-    if (error instanceof PrismaClientKnownRequestError)
-      PrismaErrorHandler(res, error);
-    else throw error;
-  }
+router.get("", async (req, res) => {
+  
 });
 
 router.patch("/:id", async (req, res) => {

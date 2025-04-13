@@ -1,5 +1,4 @@
-import useUser from "../../lib/userContext/useUser";
-import { useEffect } from "react";
+import useUser from "../../context/userContext/useUser";
 import { useNavigate } from "react-router";
 
 interface Props {
@@ -8,23 +7,17 @@ interface Props {
 
 export default function FeedProfile({className}:Props) {
   const navigate = useNavigate()
-  const { user } = useUser();
-
-  useEffect(()=> {
-    if(!user?.completedSetup){
-      navigate('/profile')
-    }
-  }, [user])
+  const { user, logOut } = useUser();
 
   return (
     <div className={className}>
       <aside className="dashboard-profile">
         <div className="profile-picture-container">
-          <img src={user?.picture} className="profile-picture" />
+          <img src={user?.image!} className="profile-picture" />
         </div>
         <div className="profile-card-container">
           <div className="profile-card">
-            <p className="profile-card-username">{user?.username}</p>
+            <p className="profile-card-username">{user?.name!}</p>
             <div className="profile-summary">
               <div>followed</div>
               <div>followers</div>
@@ -35,7 +28,7 @@ export default function FeedProfile({className}:Props) {
         <div className="profile-aditional">
           <button
             onClick={() => {
-              
+              logOut();
             }}
           >
             logout

@@ -1,5 +1,5 @@
 import { NavLink } from "react-router";
-import useUser from "../lib/userContext/useUser";
+import useUser from "../context/userContext/useUser";
 
 interface Props{
   text: string

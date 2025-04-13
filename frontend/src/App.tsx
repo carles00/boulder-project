@@ -1,30 +1,21 @@
-import { Route, Routes, useNavigate } from "react-router";
+import { Route, Routes } from "react-router";
 import Feed from "./pages/Feed/Feed";
-import { useEffect } from "react";
-import UserProvider from "./lib/userContext/userProvider";
 import LandingPage from "./pages/Landing/Landing";
 import Profile from "./pages/Profile/Profile";
 import MainLayout from "./components/MainLayout";
+import AuthLayout from "./pages/Auth/AuthLayout";
+import LoginPage from "./pages/Auth/LoginPage";
 
 function App() {
-
-  const navigate = useNavigate();
-  // useEffect(() => {
-  //   if (isAuthenticated) navigate("/feed");
-  // }, [isAuthenticated]);
-
-  // if (isLoading) {
-  //   return <div>Loading User...</div>;
-  // }
-
   return (
     <Routes>
       <Route path="*" element={<LandingPage />} />
-      <Route element={<UserProvider />}>
-        <Route element={<MainLayout/>}>
-          <Route path="/feed" element={<Feed />} />
-          <Route path="/profile" element={<Profile />} />
-        </Route>
+      <Route element={<AuthLayout />}>
+        <Route path="/login" element={<LoginPage/>}/>
+      </Route>
+      <Route element={<MainLayout />}>
+        <Route path="/feed" element={<Feed />} />
+        <Route path="/profile" element={<Profile />} />
       </Route>
     </Routes>
   );

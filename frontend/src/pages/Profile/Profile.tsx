@@ -1,4 +1,4 @@
-import useUser from "../../lib/userContext/useUser";
+import useUser from "../../context/userContext/useUser";
 
 export default function Profile() {
   const { user } = useUser();

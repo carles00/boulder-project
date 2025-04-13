@@ -14,61 +14,61 @@ datasource db {
 }
 
 model User {
-  id             Int     @id @default(autoincrement())
-  sub            String 
-  username       String  @unique
-  email          String  @unique
-  description    String?
-  completedSetup Boolean @default(false)
-  picture        String? 
-  uploadedRoutes Route[]
-  followedBy     User[]  @relation("UserFollows")
-  following      User[]  @relation("UserFollows")
-  //gymId          Int?
-  //attemptedRoutes UserRoute[]
-  // gym             Gym?        @relation(name: "gymOwner")
-  // favouriteGym    Gym?        @relation(name: "favouriteGym", fields: [gymId], references: [id])
+  id            String    @id
+  name          String
+  email         String
+  emailVerified Boolean
+  image         String?
+  createdAt     DateTime
+  updatedAt     DateTime
+  sessions      Session[]
+  accounts      Account[]
+
+  @@unique([email])
+  @@map("user")
 }
 
-// model Gym {
-//   id          Int     @id @default(autoincrement())
-//   name        String
-//   email       String  @unique
-//   address     String
-//   rating      Int     @default(0)
-//   description String?
-//   website     String?
-//   phone       String?
-//   logo        String?
-//   owner       User    @relation(name: "gymOwner", fields: [id], references: [id])
-//   users       User[]  @relation(name: "favouriteGym")
-//   userId      Int
-// }
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime
+  updatedAt DateTime
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-model Route {
-  id          Int      @id @default(autoincrement())
-  userId      String
-  name        String
-  grade       String
-  picture     String
-  description String?
-  sctive      Boolean
-  setDate     DateTime
-  user        User     @relation(fields: [id], references: [id])
-  tries       Int      @default(0)
-  completed   Boolean  @default(false)
-  rating      Int      @default(0)
-  //attempts    UserRoute[]
+  @@unique([token])
+  @@map("session")
 }
 
-// model UserRoute {
-//   userId    Int
-//   routeId   Int
-//   tires     Int     @default(0)
-//   completed Boolean @default(false)
-//   rating    Int     @default(0)
-//   User      User    @relation(fields: [userId], references: [id])
-//   Route     Route   @relation(fields: [routeId], references: [id])
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime
+  updatedAt             DateTime
 
-//   @@id([userId, routeId])
-// }
+  @@map("account")
+}
+
+model Verification {
+  id         String    @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime?
+  updatedAt  DateTime?
+
+  @@map("verification")
+}

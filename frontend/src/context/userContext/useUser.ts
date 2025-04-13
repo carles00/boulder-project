@@ -1,7 +1,7 @@
-import { useContext } from "react";
+import { use } from "react";
 import { UserContext } from "./userContext";
 
 export default function useUser(){
-  const userContext = useContext(UserContext);
+  const userContext = use(UserContext);
   return userContext!
 }
