@@ -2,14 +2,12 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import useUser from "../context/userContext/useUser";
 
-export default function useUserAuthenticated(){
+export default function useAuthenticated(){
   const navigate = useNavigate()
   const {user} = useUser();
 
   useEffect(()=>{
-      if(user){
-        navigate('/feed')
-      }else{
+      if(!user){
         navigate('/')
       }
     },[user, navigate]);

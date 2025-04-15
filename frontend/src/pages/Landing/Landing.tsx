@@ -1,6 +1,9 @@
 import { Link } from "react-router";
+import useUnauthenticated from "../../hooks/useUnauthenticated";
 
 export default function LandingPage() {
+  useUnauthenticated();
+
   return (
     <div className="grid h-screen w-screen font-montserrat md:grid-cols-7">
       <main className="col-span-4 flex flex-col items-center justify-center gap-20 bg-stone-600">
@@ -21,7 +24,7 @@ export default function LandingPage() {
           </span>
         </div>
         <div className="flex">
-          <div className="h-15 w-30 flex items-center justify-center rounded-sm bg-lime-600 text-2xl font-bold text-orange-100 transition-colors hover:cursor-pointer hover:bg-lime-700">
+          <div className="flex h-15 w-30 items-center justify-center rounded-sm bg-lime-600 text-2xl font-bold text-orange-100 transition-colors hover:cursor-pointer hover:bg-lime-700">
             <Link
               className="flex h-full w-full items-center justify-center"
               to={"/login"}

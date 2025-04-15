@@ -1,8 +1,8 @@
-import useUserAuthenticated from "../../hooks/useUserAuthenticated";
+import useAuthenticated from "../../hooks/useUserAuthenticated";
 import FeedProfile from "./FeedProfile";
 
 export default function Feed(){
-  useUserAuthenticated();
+  useAuthenticated();
 
   return(
     <div className="feed">
