@@ -1,4 +1,4 @@
-import { UseFormRegisterReturn } from "react-hook-form";
+//import { UseFormRegisterReturn } from "react-hook-form";
 import { FormEventHandler, ReactNode } from "react";
 
 interface FormProps {
@@ -28,14 +28,12 @@ interface FormInputProps {
   type: "text" | "password" | "email";
   label: string;
   name: string;
-  register: UseFormRegisterReturn;
 }
 
 FormComponent.FormInput = function FormInput({
   type,
   label,
-  name,
-  register,
+  name
 }: FormInputProps) {
   return (
     <div className="form-group">
@@ -43,7 +41,6 @@ FormComponent.FormInput = function FormInput({
         className="form-input"
         placeholder="placeholder"
         type={type}
-        {...register}
       />
       <label className="form-label" htmlFor={name}>
         {label}
