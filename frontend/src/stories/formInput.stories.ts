@@ -16,7 +16,7 @@ type Story = StoryObj<typeof meta>;
 export const TextInput: Story = {
   args:{
     type: 'text',
-    label: 'test',
+    label: 'Email',
     name: 'testInput'
   }
 }

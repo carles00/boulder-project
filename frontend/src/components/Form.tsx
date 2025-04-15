@@ -33,16 +33,19 @@ interface FormInputProps {
 FormComponent.FormInput = function FormInput({
   type,
   label,
-  name
+  name,
 }: FormInputProps) {
   return (
-    <div className="form-group">
+    <div className="relative flex w-full flex-col">
       <input
-        className="form-input"
+        className="peer h-14 border-0 border-l-4 border-l-stone-600 bg-stone-100 p-2.5 text-xl transition-all duration-150 ease-in-out placeholder:opacity-0 hover:border-l-lime-600 hover:bg-stone-200 focus-visible:border-l-lime-600 focus-visible:bg-stone-200"
         placeholder="placeholder"
         type={type}
       />
-      <label className="form-label" htmlFor={name}>
+      <label
+        className="pointer-events-none absolute top-4 left-3.5 peer-[:not(:placeholder-shown)]:translate-y-10"
+        htmlFor={name}
+      >
         {label}
       </label>
     </div>
