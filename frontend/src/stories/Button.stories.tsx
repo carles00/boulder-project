@@ -15,6 +15,21 @@ type Story = StoryObj<typeof meta>;
 
 export const StandardButton: Story = {
   args:{
-    children: <span>Standard</span>
+    children: <span>Standard</span>,
+    buttonType: 'primary',
+  }
+}
+
+export const DangerButton: Story = {
+  args:{
+    children: <span>Danger</span>,
+    buttonType: 'danger',
+  }
+}
+
+export const WhiteButton: Story = {
+  args:{
+    children: <span>White</span>,
+    buttonType: 'white',
   }
 }
