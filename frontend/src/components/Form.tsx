@@ -43,7 +43,7 @@ FormComponent.FormInput = function FormInput({
         type={type}
       />
       <label
-        className="pointer-events-none absolute top-4 left-3.5 peer-[:not(:placeholder-shown)]:translate-y-10"
+        className="pointer-events-none absolute top-4 left-3.5 transition-all duration-150 ease-in-out peer-[:not(:placeholder-shown)]:-translate-y-4 peer-[:not(:placeholder-shown)]:opacity-40 "
         htmlFor={name}
       >
         {label}

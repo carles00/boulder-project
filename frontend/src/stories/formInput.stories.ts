@@ -16,7 +16,23 @@ type Story = StoryObj<typeof meta>;
 export const TextInput: Story = {
   args:{
     type: 'text',
-    label: 'Email',
+    label: 'text',
     name: 'testInput'
+  }
+}
+
+export const EmailInput: Story = {
+  args:{
+    type: 'email',
+    label: 'email',
+    name: 'emailInput'
+  }
+}
+
+export const PasswordInput: Story = {
+  args:{
+    type: 'password',
+    label: 'password',
+    name: 'passwordInput'
   }
 }
