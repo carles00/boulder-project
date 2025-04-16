@@ -1,14 +1,23 @@
+import FormComponent from "../../components/Form";
 import useUser from "../../context/userContext/useUser";
-import useUnauthenticated from "../../hooks/useUnauthenticated";
 
-export default function LoginPage() {
-  useUnauthenticated();
-  const {logIn, signUp} = useUser();
+export default function LoginForm() {
+  const {logIn} = useUser();
+
+  const logInUser = () => {
+    logIn('test@example.com','password1234')
+  }
 
   return (
     <>
-      <button onClick={()=>{logIn('test@example.com','password1234')}}>Login</button>
-      <button onClick={()=>{signUp('test@example.com','password1234',"test")}}>Sign up</button>
+      <FormComponent method="post" onSubmit={logInUser}>
+        <FormComponent.FormInput type="text" name="name" label="Username"/>
+        <FormComponent.FormInput type="email" name="email" label="Email"/>
+        <FormComponent.FormInput type="password" name="password" label="Password" />
+        <FormComponent.SubmitButton>
+          Submit
+        </FormComponent.SubmitButton>
+      </FormComponent>
     </>
   );
 }

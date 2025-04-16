@@ -1,6 +1,8 @@
 import { Outlet } from "react-router";
+import useUnauthenticated from "../../hooks/useUnauthenticated";
 
 export default function AuthLayout() {
+  useUnauthenticated();
   return (
     <div className="flex h-screen w-screen items-center justify-center bg-stone-600 font-montserrat md:grid-cols-7">
       <main className="flex">

@@ -14,7 +14,7 @@ export default function FormComponent({
 }: FormProps) {
   return (
     <form
-      className="form-component"
+      className="flex flex-col h-full w-full gap-2.5 items-center justify-center"
       method={method}
       onSubmit={onSubmit}
       noValidate
