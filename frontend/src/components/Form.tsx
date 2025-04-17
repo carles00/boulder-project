@@ -3,13 +3,10 @@ import Button from "./Button";
 
 interface FormProps {
   children: ReactNode;
-  action: (payload: FormData)=>void
+  action: (payload: FormData) => void;
 }
 
-export default function FormComponent({
-  children,
-  action
-}: FormProps) {
+export default function FormComponent({ children, action }: FormProps) {
   return (
     <form
       action={action}
@@ -35,10 +32,12 @@ FormComponent.FormInput = function FormInput({
   return (
     <div className="relative flex w-full flex-col">
       <input
-        className="peer h-14 border-0 border-l-4 border-l-stone-600 bg-stone-100 p-2.5 text-xl transition-all duration-150 ease-in-out placeholder:opacity-0 hover:border-l-lime-600 hover:bg-stone-200 focus-visible:border-l-lime-600 focus-visible:bg-stone-200"
+        className={`peer h-14 rounded-sm border-0 border-l-4 border-l-stone-100 bg-stone-100 p-2.5 text-xl shadow-sm transition-all duration-150 ease-in-out placeholder:opacity-0 
+          hover:border-l-lime-600 hover:bg-stone-200 focus-visible:border-l-lime-600 focus-visible:bg-stone-200 focus-visible:outline-stone-800`}
         placeholder="placeholder"
         type={type}
         name={name}
+        required
       />
       <label
         className="pointer-events-none absolute top-4 left-3.5 transition-all duration-150 ease-in-out peer-[:not(:placeholder-shown)]:-translate-y-4 peer-[:not(:placeholder-shown)]:opacity-40"
