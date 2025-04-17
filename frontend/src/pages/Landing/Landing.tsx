@@ -1,5 +1,5 @@
-import { Link } from "react-router";
 import useUnauthenticated from "../../hooks/useUnauthenticated";
+import LoginForm from "../Auth/LoginForm";
 
 export default function LandingPage() {
   useUnauthenticated();
@@ -24,14 +24,7 @@ export default function LandingPage() {
           </span>
         </div>
         <div className="flex">
-          <div className="flex h-15 w-30 items-center justify-center rounded-sm bg-lime-600 text-2xl font-bold text-orange-100 transition-colors hover:cursor-pointer hover:bg-lime-700">
-            <Link
-              className="flex h-full w-full items-center justify-center"
-              to={"/login"}
-            >
-              Log In
-            </Link>
-          </div>
+          <LoginForm />
         </div>
       </main>
       <aside className="col-span-3 hidden h-screen overflow-hidden bg-[url(/images/homeImage2.webp)] bg-center md:flex"></aside>

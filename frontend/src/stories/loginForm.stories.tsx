@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import LoginForm from "../pages/Auth/LoginPage";
+import LoginForm from "../pages/Auth/LoginForm";
 import UserProvider from "../context/userContext/userProvider";
 import { BrowserRouter, Route, Routes } from "react-router";
 

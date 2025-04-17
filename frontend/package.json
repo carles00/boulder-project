@@ -12,6 +12,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "@tailwindcss/vite": "^4.0.3",
     "@tanstack/react-query": "^5.73.3",
     "@tanstack/react-query-devtools": "^5.74.0",

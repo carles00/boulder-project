@@ -4,39 +4,38 @@ import useUser from "../../context/userContext/useUser";
 
 export default function LoginForm() {
   const { logIn } = useUser();
+
   const [loginState, loginAction] = useActionState(
-    (prevState: unknown, formData: FormData) => {
-      const username = formData.get("username");
+    async (_ : unknown, formData: FormData) =>{
       const email = formData.get("email");
       const password = formData.get("password");
       
-      console.log(username, email, password)
-      
+      if(!email || !password){
+        return {
+          error: 'Missing fields'
+        }
+      }
+
+      await logIn(email.toString(), password.toString());
 
       return {
-        usernameError: null,
-        emailError: null,
-        passwordError: null
+        error: null,
       }
     },
     null,
   );
 
-  const logInUser = () => {
-    logIn("test@example.com", "password1234");
-  };
-
   return (
     <>
       <FormComponent action={loginAction}>
-        <FormComponent.FormInput type="text" name="username" label="Username" />
         <FormComponent.FormInput type="email" name="email" label="Email" />
         <FormComponent.FormInput
           type="password"
           name="password"
           label="Password"
         />
-        <FormComponent.SubmitButton>Submit</FormComponent.SubmitButton>
+        {loginState?.error && <FormComponent.FormError message={loginState.error}/>}
+        <FormComponent.SubmitButton>Log In</FormComponent.SubmitButton>
       </FormComponent>
     </>
   );

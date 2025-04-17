@@ -4,7 +4,7 @@ import LandingPage from "./pages/Landing/Landing";
 import Profile from "./pages/Profile/Profile";
 import MainLayout from "./components/MainLayout";
 import AuthLayout from "./pages/Auth/AuthLayout";
-import LoginForm from "./pages/Auth/LoginPage";
+import LoginForm from "./pages/Auth/LoginForm";
 
 function App() {
   return (
