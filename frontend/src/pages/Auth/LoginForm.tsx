@@ -10,6 +10,7 @@ export default function LoginForm() {
       const email = formData.get("email");
       const password = formData.get("password");
       
+      //TODO data verification
       if(!email || !password){
         return {
           error: 'Missing fields'
@@ -34,7 +35,7 @@ export default function LoginForm() {
           name="password"
           label="Password"
         />
-        {loginState?.error && <FormComponent.FormError message={loginState.error}/>}
+        <FormComponent.FormError message={loginState?.error}/>
         <FormComponent.SubmitButton>Log In</FormComponent.SubmitButton>
       </FormComponent>
     </>
