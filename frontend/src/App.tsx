@@ -4,14 +4,14 @@ import LandingPage from "./pages/Landing/Landing";
 import Profile from "./pages/Profile/Profile";
 import MainLayout from "./components/MainLayout";
 import AuthLayout from "./pages/Auth/AuthLayout";
-import LoginPage from "./pages/Auth/LoginPage";
+import SignUpForm from "./pages/Auth/SignUpForm";
 
 function App() {
   return (
     <Routes>
       <Route path="*" element={<LandingPage />} />
       <Route element={<AuthLayout />}>
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUpForm />} />
       </Route>
       <Route element={<MainLayout />}>
         <Route path="/feed" element={<Feed />} />

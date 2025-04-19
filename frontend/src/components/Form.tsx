@@ -1,22 +1,18 @@
-//import { UseFormRegisterReturn } from "react-hook-form";
-import { FormEventHandler, ReactNode } from "react";
+import { ReactNode } from "react";
+import Button from "./Button";
+import clsx from "clsx";
+import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 
 interface FormProps {
   children: ReactNode;
-  method: "get" | "post";
-  onSubmit: FormEventHandler;
+  action: (payload: FormData) => void;
 }
 
-export default function FormComponent({
-  children,
-  method,
-  onSubmit,
-}: FormProps) {
+export default function FormComponent({ children, action }: FormProps) {
   return (
     <form
-      className="form-component"
-      method={method}
-      onSubmit={onSubmit}
+      action={action}
+      className="flex h-full w-full flex-col items-center justify-center gap-2.5"
       noValidate
     >
       {children}
@@ -28,21 +24,38 @@ interface FormInputProps {
   type: "text" | "password" | "email";
   label: string;
   name: string;
+
+  errorMessage?: string;
 }
 
 FormComponent.FormInput = function FormInput({
   type,
   label,
-  name
+  name,
+  errorMessage,
 }: FormInputProps) {
+  const classString = clsx(
+    `peer/input h-14 rounded-sm border-0 border-l-6 bg-stone-100 p-2.5 text-xl shadow-sm transition-all duration-150 ease-in-out placeholder:opacity-0 hover:border-l-lime-600 hover:bg-stone-200 focus-visible:border-l-lime-600 focus-visible:bg-stone-200 focus-visible:outline-stone-800 `,
+    {
+      "border-l-stone-100": !errorMessage,
+      "border-l-red-600 hover:border-l-red-600 focus-visible:border-l-red-600":
+        errorMessage,
+    },
+  );
+
   return (
-    <div className="form-group">
+    <div className="relative flex w-full flex-col">
       <input
-        className="form-input"
+        className={classString}
         placeholder="placeholder"
         type={type}
+        name={name}
+        required
       />
-      <label className="form-label" htmlFor={name}>
+      <label
+        className="pointer-events-none absolute top-4 left-3.5 transition-all duration-150 ease-in-out peer-[:not(:placeholder-shown)]/input:opacity-30 peer-[:not(:placeholder-shown)]/input:-translate-y-4"
+        htmlFor={name}
+      >
         {label}
       </label>
     </div>
@@ -51,14 +64,28 @@ FormComponent.FormInput = function FormInput({
 
 interface SubmitButtonProps {
   children: ReactNode;
+  disabled?: boolean;
 }
 
 FormComponent.SubmitButton = function SubmitButton({
-  children,
+  children
 }: SubmitButtonProps) {
   return (
-    <button className="form-button" type="submit">
+    <Button type="submit" buttonType="primary">
       {children}
-    </button>
+    </Button>
   );
+};
+
+interface FormErrorProps {
+  message?: string | null
+}
+
+FormComponent.FormError = function FormError({message}: FormErrorProps){
+  return(
+    <div className={`${message? 'flex' : 'hidden'} h-10 bg-stone-50 p-2 rounded-sm flex justify-center items-center text-red-600`}>
+      <ExclamationTriangleIcon className="size-3 "/>
+      {message}
+    </div>
+  )
 };
